@@ -7,7 +7,8 @@ class DataTypeStrategy(ABC):
     """
 
     @abstractmethod
-    def is_valid_type(value): ...
+    def is_valid_type(value):
+        """An abstract method to determine if the data type is valid"""
 
     @classmethod
     def supports_operation(cls, operation):

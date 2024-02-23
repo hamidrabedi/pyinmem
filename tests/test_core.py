@@ -1,3 +1,5 @@
+import json
+import os
 import time
 
 from pyinmem.core import PyInMemStore
@@ -93,3 +95,35 @@ def test_delete_method():
 
     store.delete(key)
     assert store.get(key) is None
+
+
+def test_save_and_load_data(tmp_path):
+    # Temporary file for testing
+    test_file = tmp_path / "test_data.json"
+
+    # Initialize store and add some data
+    store = PyInMemStore(save_data=True, save_interval=1, file_data_path=test_file)
+    store.set("test_key", "test_value")
+    store.set("test_key2", "test_value2", 1)  # Key with TTL
+
+    # Save data
+    store._save_data()
+
+    # Check if file is created and data is written
+    assert os.path.exists(test_file)
+    with open(test_file, "r") as file:
+        data = json.load(file)
+        assert "test_key" in data["store"]
+        assert data["store"]["test_key"] == "test_value"
+
+    # Create a new instance and load data
+    new_store = PyInMemStore(save_data=True, save_interval=1)
+    new_store.save_data_file_path = str(test_file)
+    new_store._load_data()
+
+    # Check if data is correctly loaded
+    assert new_store.get("test_key") == "test_value"
+    assert new_store.get("test_key2") == "test_value2"
+
+    # Optionally, clean up the test file if desired
+    os.remove(test_file)
