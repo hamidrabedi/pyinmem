@@ -1,0 +1,51 @@
+repos:
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v3.10.0
+    hooks:
+      - id: commitizen
+      - id: commitizen-branch
+        stages:
+          - push
+
+  - repo: local
+    hooks:
+      - id: isort
+        name: isort
+        entry: isort
+        require_serial: true
+        language: python
+        types_or: [cython, pyi, python]
+
+  - repo: local
+    hooks:
+      - id: black
+        name: Black
+        entry: black
+        language: system
+        types:
+          - python
+
+  - repo: local
+    hooks:
+      - id: ruff
+        name: ruff
+        entry: poetry run ruff check
+        language: system
+        stages:
+          - pre-commit
+          - pre-push
+        types:
+          - python
+
+  - repo: local
+    hooks:
+    - id: pytest-check
+      name: pytest-check
+      types: [python]
+      entry: pytest
+      language: system
+      pass_filenames: false
+      always_run: true
+      stages:
+        - pre-commit
+        - pre-push

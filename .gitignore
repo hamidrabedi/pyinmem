@@ -1,0 +1,115 @@
+# Created by https://www.gitignore.io
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+### Thumbnails ###
+._*
+
+# Files that might appear on the external disk
+.Spotlight-V100
+.Trashes
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+### Python ###
+### Byte-compiled / optimized / DLL files ###
+__pycache__/
+*.py[cod]
+
+### C extensions ###
+*.so
+
+### Distribution / packaging ###
+.Python
+env/
+.env
+venv/
+.venv
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg-info/
+.installed.cfg
+*.egg
+
+### PyInstaller ###
+# Usually, these files are written by a python script from a template
+# Before PyInstaller builds the exe, to inject the date/other info into it
+*.manifest
+*.spec
+
+### Installer logs ###
+pip-log.txt
+pip-delete-this-directory.txt
+
+### Unit test / coverage reports ###
+htmlcov/
+.tox/
+.coverage
+.cache
+nosetests.xml
+coverage.xml
+
+### Translations ###
+*.mo
+*.pot
+
+### PyBuilder ###
+target/
+
+### Django ###
+*.log
+*.pyc
+local_settings.py
+collectstatic/
+settings.ini
+media/upload/*
+!media/upload/default
+.dccache
+
+### Code editor ###
+.vscode
+.idea
+
+### Database ###
+db.sqlite3
+
+### MyPy ###
+.mypy_cache/
+### Docs ###
+!docs/**
+
+### Sphinx documentation ###
+docs/_build/
+
+warehouse/tests/querysets/test_A.py
+
+!configs/**
+
+# .confidential
+
+!.vscode/**
+
+# settings-prod.toml
+# settings-dev.toml
+# settings-stage.toml
+
+media/uploads

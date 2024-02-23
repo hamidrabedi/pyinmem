@@ -1,0 +1,102 @@
+[tool.poetry]
+name = "pyinmem"
+version = "1"
+description = "Python in-memory database"
+authors = ["Your Name <you@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+poetry = "^1.7.1"
+pytest = "^8.0.1"
+
+[tool.poetry.group.dev.dependencies]
+pylint = "^3.0.3"
+ruff = "^0.2.2"
+isort = "^5.13.2"
+pre-commit = "^3.6.2"
+commitizen = "^3.15.0"
+black = "^24.2.0"
+pytest = "^8.0.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+
+[tool.ruff]
+line-length = 88
+
+exclude = [
+    "migrations",
+    "tests",
+    "docs"
+]
+
+[tool.ruff.lint]
+select = [
+  # pyflakes
+  "F",
+  # pycodestyle
+  "E", "W",
+  # flake8-2020
+  "YTT",
+  # flake8-bugbear
+  "B",
+  # flake8-quotes
+  "Q",
+  # flake8-debugger
+  "T10",
+  # flake8-gettext
+  "INT",
+  # pylint
+  "PL",
+  # misc lints
+  "PIE",
+  # flake8-pyi
+  "PYI",
+  # tidy imports
+  "TID",
+  # implicit string concatenation
+  "ISC",
+  # type-checking imports
+  "TCH",
+  # comprehensions
+  "C4",
+  # pygrep-hooks
+  "PGH",
+  # Ruff-specific rules
+  "RUF",
+  # flake8-bandit: exec-builtin
+  "S102",
+  # numpy-legacy-random
+  "NPY002",
+  # Perflint
+  "PERF",
+  # flynt
+  "FLY",
+  # flake8-logging-format
+  "G",
+]
+
+extend-ignore = [
+"W191",
+"E111",
+"E114",
+"E117",
+"D206",
+"D300",
+"Q000",
+"Q001",
+"Q002",
+"Q003",
+"COM812",
+"COM819",
+"ISC001",
+"ISC002",
+"TID252",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"*/__init__.py" = ["F401"]
