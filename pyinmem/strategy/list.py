@@ -1,4 +1,5 @@
-from ..exceptions import DataTypeError
+from typing import Any, Dict
+
 from .base import DataTypeStrategy
 
 
@@ -6,32 +7,28 @@ class ListStrategy(DataTypeStrategy):
     """Strategy for handling list data types"""
 
     @classmethod
-    def is_valid_type(cls, value):
+    def is_valid_type(cls, value: Any) -> bool:
         """Check if the given value is a list."""
         return isinstance(value, list)
 
-    def ensure_list(self, store, key):
+    def ensure_list(self, store: Dict[str, Any], key: str) -> None:
         """Ensure the value for the given key is a list in the store."""
         if key not in store or not isinstance(store[key], list):
             store[key] = []
 
-    def lpush(self, store, key, value):
+    def lpush(self, store: Dict[str, Any], key: str, value: Any) -> int:
         """Push a value to the beginning of the list at the given key."""
-        try:
-            self.ensure_list(store, key)
-            store[key].insert(0, value)
-            return len(store[key])
-        except TypeError as exc:
-            raise DataTypeError(f"Value for key '{key}' is not a list.") from exc
+        self.ensure_list(store, key)
+        store[key].insert(0, value)
+        return len(store[key])
 
-    def rpop(self, store, key):
+    def rpop(self, store: Dict[str, Any], key: str) -> Any:
         """Pop a value from the end of the list at the given key."""
         self.ensure_list(store, key)
         if store[key]:
             return store[key].pop()
-        return None
 
-    def llen(self, store, key):
+    def llen(self, store: Dict[str, Any], key: str) -> int:
         """Return the length of the list at the given key."""
         self.ensure_list(store, key)
         return len(store[key])

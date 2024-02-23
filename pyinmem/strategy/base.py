@@ -1,4 +1,5 @@
 from abc import ABC, abstractmethod
+from typing import Any
 
 
 class DataTypeStrategy(ABC):
@@ -7,10 +8,10 @@ class DataTypeStrategy(ABC):
     """
 
     @abstractmethod
-    def is_valid_type(value):
+    def is_valid_type(value: Any) -> bool:
         """An abstract method to determine if the data type is valid"""
 
     @classmethod
-    def supports_operation(cls, operation):
+    def supports_operation(cls, operation: str) -> bool:
         """Check if the strategy supports a given operation"""
         return hasattr(cls, operation)

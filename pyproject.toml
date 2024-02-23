@@ -9,6 +9,8 @@ readme = "README.md"
 python = "^3.11"
 poetry = "^1.7.1"
 pytest = "^8.0.1"
+coverage = "^7.4.2"
+pytest-cov = "^4.1.0"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^3.0.3"
@@ -27,11 +29,8 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff]
 line-length = 88
-
 exclude = [
-    "migrations",
     "tests",
-    "docs"
 ]
 
 [tool.ruff.lint]
@@ -100,3 +99,4 @@ extend-ignore = [
 
 [tool.ruff.lint.per-file-ignores]
 "*/__init__.py" = ["F401"]
+"tests/**" = ["PLR2004"]

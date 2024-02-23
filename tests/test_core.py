@@ -3,6 +3,7 @@ import os
 import time
 
 from pyinmem.core import PyInMemStore
+from pyinmem.strategy import SortedSetStrategy
 
 
 def test_string_strategy():
@@ -18,6 +19,7 @@ def test_list_strategy():
     key = "test_list"
     value = "item1"
     store.lpush(key, value)
+    assert store.llen(key) == 1
     assert store.get(key) == [value]
     assert store.rpop(key) == value
     assert store.get(key) == []
@@ -62,14 +64,31 @@ def test_set_operations():
     assert store.sis_member(key, "hello") is False
 
 
-def test_sorted_set_operations():
-    store = PyInMemStore()
-    key = "sorted_set_key"
-    scores = {"member1": 1, "member2": 2, "member3": 3}
+def test_sorted_set_strategy():
+    store = {}
+    sorted_set_strategy = SortedSetStrategy()
 
-    store.zadd(key, scores)
-    assert store.zscore(key, "member1") == 1
-    assert store.zrange(key, 0, 1) == ["member1", "member2"]
+    # Test adding to sorted set
+    sorted_set_strategy.zadd(store, "my_sorted_set", {"Alice": 100, "Bob": 90})
+    assert store["my_sorted_set"]["Alice"] == 100
+    assert store["my_sorted_set"]["Bob"] == 90
+
+    # Test getting range from sorted set
+    assert sorted_set_strategy.zrange(store, "my_sorted_set", 0, 1) == ["Bob", "Alice"]
+
+    # Test getting score of a member
+    assert sorted_set_strategy.zscore(store, "my_sorted_set", "Alice") == 100
+
+    # Test getting range from a non-existent key
+    assert sorted_set_strategy.zrange(store, "non_existent_key", 0, -1) == []
+
+    # Test getting score of a member from a non-existent key
+    assert sorted_set_strategy.zscore(store, "my_sorted_set", "Charlie") is None
+
+    # Test adding to a key that's not a sorted set (should reset to empty dict)
+    store["not_a_sorted_set"] = "some_string"
+    sorted_set_strategy.zadd(store, "not_a_sorted_set", {"Charlie": 80})
+    assert store["not_a_sorted_set"] == {"Charlie": 80}
 
 
 def test_ttl_and_expire():
