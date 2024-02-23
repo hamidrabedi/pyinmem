@@ -41,7 +41,7 @@ PyInMemStore is a lightweight, in-memory data store written in Python. It provid
 ```python
 from pyinmemstore import PyInMemStore
 
-store = PyInMemStore()
+store = PyInMemStore(save_data=True)
 
 
 store.set('hello', 'world')
