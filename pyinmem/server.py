@@ -1,3 +1,4 @@
+import argparse
 import logging
 import re
 import socket
@@ -89,7 +90,15 @@ class PyInMemStoreServer:
 
 
 if __name__ == "__main__":
-    server = PyInMemStoreServer()
+    parser = argparse.ArgumentParser(description="PyInMemStore Server")
+    parser.add_argument(
+        "--host", type=str, default="127.0.0.1", help="Server host address"
+    )
+    parser.add_argument("--port", type=int, default=5599, help="Server port")
+
+    args = parser.parse_args()
+
+    server = PyInMemStoreServer(host=args.host, port=args.port)
     try:
         server.start()
     except KeyboardInterrupt:
