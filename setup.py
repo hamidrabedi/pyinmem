@@ -21,8 +21,8 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description,
     packages=find_packages(),
-    install_requires=['opencv-python', 'pyautogui', 'pyaudio'],
-    keywords=['python', 'video', 'stream', 'video stream', 'camera stream', 'sockets'],
+    install_requires=[],
+    keywords=['python', 'cache', 'memory', 'database', 'pyinmem', 'in memory database'],
     classifiers=[
         "Development Status :: 1 - Planning",
         "Intended Audience :: Developers",
