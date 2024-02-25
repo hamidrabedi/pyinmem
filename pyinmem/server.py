@@ -15,7 +15,9 @@ class PyInMemStoreServer:
     A server class for handling TCP connections and executing store operations.
     """
 
-    def __init__(self, host="127.0.0.1", port=5599):
+    def __init__(self, host: str = "127.0.0.1", port: int = 5599) -> None:
+        self.host = host
+        self.port = port
         self.store = PyInMemStore()
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((host, port))
@@ -23,7 +25,11 @@ class PyInMemStoreServer:
         self.running = True
 
     def start(self):
-        logger.info("Server started, waiting for connections...")
+        logger.info(
+            "Server started(host=%s, port=%s), waiting for connections...",
+            self.host,
+            self.port,
+        )
         try:
             while self.running:
                 client, addr = self.server.accept()
