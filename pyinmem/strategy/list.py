@@ -6,8 +6,7 @@ from .base import DataTypeStrategy
 class ListStrategy(DataTypeStrategy):
     """Strategy for handling list data types"""
 
-    @classmethod
-    def is_valid_type(cls, value: Any) -> bool:
+    def is_valid_type(self, value: Any) -> bool:
         """Check if the given value is a list."""
         return isinstance(value, list)
 

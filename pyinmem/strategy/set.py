@@ -6,8 +6,7 @@ from .base import DataTypeStrategy
 class SetStrategy(DataTypeStrategy):
     """Strategy for handling set data types in PyInMemStore."""
 
-    @classmethod
-    def is_valid_type(cls, value: Any) -> bool:
+    def is_valid_type(self, value: Any) -> bool:
         """Check if the given value is a set."""
         return isinstance(value, set)
 
