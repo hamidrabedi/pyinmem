@@ -1,6 +1,7 @@
 import json
 import os
 import time
+from collections import deque
 
 from pyinmem.core import PyInMemStore
 from pyinmem.strategy import SortedSetStrategy
@@ -20,9 +21,9 @@ def test_list_strategy():
     value = "item1"
     store.lpush(key, value)
     assert store.llen(key) == 1
-    assert store.get(key) == [value]
+    assert store.get(key) == deque([value])
     assert store.rpop(key) == value
-    assert store.get(key) == []
+    assert store.get(key) == deque()
 
 
 def test_string_operations():
@@ -45,7 +46,7 @@ def test_list_operations():
     for v in values:
         store.lpush(key, v)
 
-    assert store.get(key) == list(reversed(values))
+    assert store.get(key) == deque(reversed(values))
     assert store.rpop(key) == values[0]
     assert store.llen(key) == 1
 
