@@ -57,8 +57,4 @@ jobs:
       - name: Run tests
         run: |
           source .venv/bin/activate
-          pytest tests/
-          coverage report
-        run: poetry install
-      - name: Run the automated tests (for example)
-        run: poetry run pytest -v
+          pytest
