@@ -10,6 +10,11 @@ PyInMemStore is a lightweight, in-memory data store written in Python. It provid
 - Dynamic method dispatching based on data type.
 - Easy extensibility for additional data types and operations.
 
+## How to install
+```
+pip install pyinmem
+```
+
 ## Data Types and Operations
 
 ### String
