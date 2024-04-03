@@ -6,8 +6,7 @@ from .base import DataTypeStrategy
 class SortedSetStrategy(DataTypeStrategy):
     """Strategy for handling sorted set data types in PyInMemStore."""
 
-    @classmethod
-    def is_valid_type(cls, value: Any) -> bool:
+    def is_valid_type(self, value: Any) -> bool:
         """Check if the given value is suitable for a sorted set."""
         return isinstance(value, dict)
 
